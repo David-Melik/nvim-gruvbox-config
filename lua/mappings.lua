@@ -7,6 +7,11 @@ vim.g.mapleader = " "
 
 -- map("n", <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 -- map("n", <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
+-- Emulate Windows copy, cut behavior
+map("v", "<LeftRelease>", '"+y<LeftRelease>')
+map("v", "<C-c>", '"+y<CR>')
+map("v", "<C-x>", '"+d<CR>')
+
 
 -- Window Commands
 map("n", "<leader>h", ":wincmd h<CR>")

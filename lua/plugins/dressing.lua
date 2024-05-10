@@ -56,7 +56,7 @@ local function setup()
 
       -- Options for fzf selector
       fzf = {
-        window = {
+        window ={
           width = 0.5,
           height = 0.4,
         },

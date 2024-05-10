@@ -65,7 +65,7 @@ local function setup()
       exclude = {},
     },
     git = {
-      enable = false,
+      enable = true,
       ignore = true,
       timeout = 400,
     },
