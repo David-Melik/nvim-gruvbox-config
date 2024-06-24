@@ -10,36 +10,42 @@
 [typecraft](https://www.youtube.com/playlist?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn)
 
 
-## **🔧 Installation**
+# **🔧 Installation**
 
 Simply clone this repository into either `~/.config/neovim`, `~/.neovim`, or `~/.config/nvim`.
 
 All others dependencies and plugins should install automatically once you run `neovim`
 with this configuration.
 
-## **📦 Dependencies**
+# **📦 Dependencies**
 
 A couple of external dependencies are needed for our configuration of `neovim` to
 work correctly. Install the following packages with your preferred package
 manager or the language specific one.
 
 ## Nvim
+```
 cd /
-```npm install -g neovim```
-## JS/Json/Html/Css
-```npm install -g typescript typescript-language-server
-npm install -g vscode-json-languageserver
-npm install -g vscode-langservers-extracted
+sudo npm install -g neovim
+```
+## JS/Json/Html/CSS
+```
+cd /
+sudo npm install -g typescript typescript-language-server
+sudo npm install -g vscode-json-languageserver
+sudo npm install -g vscode-langservers-extracted
 ```
 ## C#
-```sudo apt install dotnet-sdk-8.0
+```
+sudo apt install dotnet-sdk-8.0
 ```
 ## Python
-```npm install -g pyright
+```
+sudo npm install -g pyright
 sudo apt install python3.10-venv
 ```
 ## Liquid project
-package.json
+``package.json``
 ```{
   "name": "galentus",
   "private": true,
