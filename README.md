@@ -2,13 +2,9 @@
 <!-- markdownlint-disable first-line-heading -->
 
 # It is custom config of 
-## a-quadrato config.nvim 
-## kickstart 
-## tutorial from typecraft
-[a-quadrato](https://github.com/a-quadrato/config.nvim)
-[kickstart](https://github.com/nvim-lua/kickstart.nvim)
-[typecraft](https://www.youtube.com/playlist?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn)
-
+- a-quadrato config.nvim [a-quadrato](https://github.com/a-quadrato/config.nvim)
+- kickstart [kickstart](https://github.com/nvim-lua/kickstart.nvim)
+- tutorial from typecraft [typecraft](https://www.youtube.com/playlist?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn)
 
 # **🔧 Installation**
 
@@ -23,28 +19,30 @@ A couple of external dependencies are needed for our configuration of `neovim` t
 work correctly. Install the following packages with your preferred package
 manager or the language specific one.
 
-## Nvim
+### Nvim
 ```
 cd /
 sudo npm install -g neovim
 ```
-## JS/Json/Html/CSS
+### JS/Json/Html/CSS
 ```
 cd /
 sudo npm install -g typescript typescript-language-server
 sudo npm install -g vscode-json-languageserver
 sudo npm install -g vscode-langservers-extracted
 ```
-## C#
+### C#
 ```
+cd /
 sudo apt install dotnet-sdk-8.0
 ```
-## Python
+### Python
 ```
+cd /
 sudo npm install -g pyright
 sudo apt install python3.10-venv
 ```
-## Liquid project
+### Liquid project
 ``package.json``
 ```{
   "name": "galentus",
