@@ -3,8 +3,6 @@
 
 [![Actions Status: CI](https://github.com/a-quadrato/config.nvim/workflows/CI/badge.svg)](https://github.com/a-quadrato/config.nvim/actions/workflows/main.yml?query=workflow%3ACI)
 
-
-# It is custom config of
 # It is custom config of a-quadrato config.nvim
 [Origin repo](https://github.com/a-quadrato/config.nvim)
 
