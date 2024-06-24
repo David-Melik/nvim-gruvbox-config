@@ -20,7 +20,7 @@ manager or the language specific one.
 
 ### Nvim
 ```
-cd /
+cd 
 sudo npm install -g neovim
 ```
 ### JS/Json/Html/CSS
@@ -32,12 +32,12 @@ sudo npm install -g vscode-langservers-extracted
 ```
 ### C#
 ```
-cd /
+cd 
 sudo apt install dotnet-sdk-8.0
 ```
 ### Python
 ```
-cd /
+cd 
 sudo npm install -g pyright
 sudo apt install python3.10-venv
 ```
