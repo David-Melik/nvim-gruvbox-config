@@ -1,0 +1,36 @@
+return {
+	--
+	--  "nvim-neotest/nvim-nio",
+	--
+	--
+	--  "mfussenegger/nvim-dap",
+	--	dependencies = {
+	--		"rcarriga/nvim-dap-ui", --the ui version
+	--    -- to check wich luangage have ui https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+	--
+	---- Python debug install watch this https://www.youtube.com/watch?v=4BnVeOUeZxc
+	--
+	--  },
+	--	config = function()
+	--		local dap, dapui = require("dap"), require("dapui")
+	--    local dapui = require("dapui")
+	--
+	--
+	--		dap.listeners.before.attach.dapui_config = function()
+	--			dapui.open()
+	--		end
+	--		dap.listeners.before.launch.dapui_config = function()
+	--			dapui.open()
+	--		end
+	--		dap.listeners.before.event_terminated.dapui_config = function()
+	--			dapui.close()
+	--		end
+	--		dap.listeners.before.event_exited.dapui_config = function()
+	--			dapui.close()
+	--		end
+	--
+	--		local dap = require("dap")
+	--		vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, {})
+	--		vim.keymap.set("n", "<Leader>dc", dap.continue, {})
+	--	end,
+}

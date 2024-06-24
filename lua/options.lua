@@ -1,100 +1,106 @@
-local opt = vim.opt
-local g = vim.g
+-- All the settings concerning Vim
+vim.cmd("set expandtab")
+vim.cmd("set tabstop=2")
+vim.cmd("set softtabstop=2")
+vim.cmd("set shiftwidth=2")
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-opt.title = true
-opt.clipboard = "unnamedplus"
-opt.cul = false -- cursor line
+vim.g.background = "light"
+vim.opt.swapfile = false
 
--- Indentline
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.smarttab = true
+-- Navigate vim panes
+vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
+vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
+vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
+vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 
--- disable tilde on end of buffer: https://github.com/neovim/neovim/pull/8546#issuecomment-643643758
-opt.fillchars = { eob = " " }
+--vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+vim.wo.number = true
 
--- Searching
-opt.hlsearch = true
-opt.ignorecase = true
-opt.incsearch = true
-opt.smartcase = true
-opt.grepprg = "rg --vimgrep"
+-- set to true if you have a nerd font instlled and selected in the terminal
+vim.g.have_nerd_font = true
 
--- STFU
-opt.errorbells = false
+-- Make line numbers default
+vim.opt.number = true
 
--- Clean stuff
-opt.undofile = true
-opt.undodir = vim.fn.stdpath "data" .. "/nvim/undodir"
+-- You can also add relative line numbers, to help with jumping.
+--  Experiment for yourself to see if you like it!
+vim.opt.relativenumber = true
 
-opt.hidden = true
-opt.mouse = "a"
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = "a"
 
--- Numbers
-opt.number = true
-opt.relativenumber = true
-opt.ruler = false
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = true
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.opt.clipboard = "unnamedplus"
 
--- disable nvim intro
-opt.shortmess:append "scI"
+-- Enable break indent
+vim.opt.breakindent = true
 
--- Vim Command Autocompletion
-opt.wildmenu = true
-opt.wildmode = "longest:full,full"
+-- Save undo history
+vim.opt.undofile = true
 
--- Support for them funny UTF-8 characters
-opt.emoji = true
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
--- No chars over 80 😠
-opt.colorcolumn = "80,120"
+-- Keep signcolumn on by default
+vim.opt.signcolumn = "yes"
 
--- Don't wrap the lines 😠
-opt.wrap = false
+-- Decrease update time
+vim.opt.updatetime = 250
 
--- Don't scroll completely to the bottom
-opt.scrolloff = 3
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
 
--- Spelling 🇬🇧
-opt.spell = true
-opt.spelllang = "en_us"
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
--- Performace
-opt.cursorline = false
-opt.cursorcolumn = false
-opt.scrolljump = 5
-opt.lazyredraw = false
--- opt.redrawtime = 10000
-opt.synmaxcol = 180
--- opt.re = 1
--- interval for writing swap file to disk, also used by gitsigns
-opt.updatetime = 250
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- for CoC
-opt.hidden = true
-opt.backup = false
-opt.swapfile = false
-opt.writebackup = false
-opt.cmdheight = 1
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = "split"
 
-opt.splitbelow = true
-opt.splitright = true
-opt.tabstop = 4
-opt.termguicolors = true
-opt.showtabline = 2
-opt.timeoutlen = 400
+-- Show which line your cursor is on
+vim.opt.cursorline = true
 
-g.mapleader = " "
-g.gruvbox_invert_selection = "0"
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
 
-g.coc_snippet_next = "<Tab>"
-g.coc_snippet_prev = "<S-Tab>"
+-- [[ Basic Keymaps ]]
+--  See `:help vim.keymap.set()`
 
--- Do not source the default filetype.vim - we use filetype.nvim
--- As of NeoVim 8.0, filetype.lua is the new default 👍
-g.do_filetype_lua = 1
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- opt.foldmethod = "expr"
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
--- opt.foldlevelstart = 99
-opt.syntax = "on"
+-- Diagnostic keymaps
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+
+-- TIP: Disable arrow keys in normal mode
+-- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+-- Keybinds to make split navigation easier.
+--  Use CTRL+<hjkl> to switch between windows
+--
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })

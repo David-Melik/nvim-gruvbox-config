@@ -1,31 +1,33 @@
---  _       _ _     _
--- (_)_ __ (_) |_  | |_   _  __ _
--- | | '_ \| | __| | | | | |/ _` |
--- | | | | | | |_ _| | |_| | (_| |
--- |_|_| |_|_|\__(_)_|\__,_|\__,_|
-
-local present, impatient = pcall(require, "impatient")
-local utils = require "utils.init"
-
-if present then
-  impatient.enable_profile()
+--Lazy -> to manage plugins
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-utils.boostrap_lazy_nvim()
-vim.loader.enable()
-
+-- To load the file in the order we want
 local modules = {
-  "filetypes",
-  "options",
-  "plugins",
-  "autocmds",
-  "mappings",
+	"filetypes",
+	"options",
+	"plugins",
+	"autocmds",
+	"mappings",
 }
 
 for _, module in ipairs(modules) do
-  local ok, err = pcall(require, module)
-  if not ok then
-    error("Error loading " .. module .. "\n\n" .. err)
-  end
+	local ok, err = pcall(require, module)
+	if not ok then
+		error("Error loading " .. module .. "\n\n" .. err)
+	end
 end
---require("mappings").misc()
+--
+
+require("lazy").setup("plugins") --start lazy
+--npm install -g neovim
