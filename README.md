@@ -1,4 +1,3 @@
-@@ -1,29 +1,29 @@
 <!-- markdownlint-disable first-line-heading -->
 
 # It is custom config of 
@@ -44,7 +43,8 @@ sudo apt install python3.10-venv
 ```
 ### Liquid project
 ``package.json``
-```{
+```
+{
   "name": "galentus",
   "private": true,
   "scripts": {
