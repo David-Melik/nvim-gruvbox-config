@@ -21,14 +21,14 @@ manager or the language specific one.
 ### Nvim
 ```
 cd 
-sudo npm install -g neovim
+npm install -g neovim
 ```
 ### JS/Json/Html/CSS
 ```
-cd /
-sudo npm install -g typescript typescript-language-server
-sudo npm install -g vscode-json-languageserver
-sudo npm install -g vscode-langservers-extracted
+cd 
+npm install -g typescript typescript-language-server
+npm install -g vscode-json-languageserver
+npm install -g vscode-langservers-extracted
 ```
 ### C#
 ```
@@ -38,7 +38,7 @@ sudo apt install dotnet-sdk-8.0
 ### Python
 ```
 cd 
-sudo npm install -g pyright
+npm install -g pyright
 sudo apt install python3.10-venv
 ```
 ### Liquid project
