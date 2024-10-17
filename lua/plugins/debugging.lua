@@ -14,6 +14,30 @@ return {
       require("dapui").setup()
       require("dap-go").setup()
 
+      -- Add C/C++ Debugger (lldb)
+      dap.adapters.lldb = {
+        type = "executable",
+        command = "/usr/lib/llvm-14/bin/lldb-vscode", -- Replace with the actual path
+        name = "lldb",
+      }
+
+      dap.configurations.cpp = {
+        {
+          name = "Launch file",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          args = {},
+        },
+      }
+
+      dap.configurations.c = dap.configurations.cpp
+      dap.configurations.rust = dap.configurations.cpp
+
       -- Handled by nvim-dap-go
       -- dap.adapters.go = {
       --   type = "server",
@@ -23,6 +47,7 @@ return {
       --     args = { "dap", "-l", "127.0.0.1:${port}" },
       --   },
       -- }
+
       local netcoredbg = vim.fn.exepath "netcoredbg"
       if netcoredbg ~= "" then
         dap.adapters.coreclr = {

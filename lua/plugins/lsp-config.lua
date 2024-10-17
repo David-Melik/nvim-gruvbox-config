@@ -129,7 +129,7 @@ return {
         -- tsserver = {},
         --
 
-        tsserver = {}, -- Javascript/Typescript npm install -g typescript typescript-language-server
+        -- not work anymore due to update  tsserver = {}, -- Javascript/Typescript npm install -g typescript typescript-language-server
         jsonls = {}, -- JSON  npm install -g vscode-json-languageserver
         cssls = {}, --css npm install -g vscode-langservers-extracted
         html = {}, --npm i:help lspconfig-allnstall -g vscode-langservers-extracted
