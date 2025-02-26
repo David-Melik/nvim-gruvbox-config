@@ -1,6 +1,7 @@
 <!-- markdownlint-disable first-line-heading -->
 
-# It is custom config of 
+# It is custom config of
+
 - a-quadrato config.nvim [a-quadrato](https://github.com/a-quadrato/config.nvim)
 - kickstart [kickstart](https://github.com/nvim-lua/kickstart.nvim)
 - tutorial from typecraft [typecraft](https://www.youtube.com/playlist?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn)
@@ -19,30 +20,43 @@ work correctly. Install the following packages with your preferred package
 manager or the language specific one.
 
 ### Nvim
+
 ```
-cd 
+cd
 npm install -g neovim
 ```
+
 ### JS/Json/Html/CSS
+
 ```
-cd 
+cd
 npm install -g typescript typescript-language-server
 npm install -g vscode-json-languageserver
 npm install -g vscode-langservers-extracted
 ```
-### C#
+
+### C #
+
 ```
-cd 
+cd
 sudo apt install dotnet-sdk-8.0
+dotnet tool install -g dotnet-format
 ```
+
 ### Python
+
 ```
-cd 
+cd
 npm install -g pyright
 sudo apt install python3.10-venv
+pip install debugpy #for debugger
+
 ```
+
 ### Liquid project
-``package.json``
+
+`package.json`
+
 ```
 {
   "name": "galentus",
@@ -56,10 +70,10 @@ sudo apt install python3.10-venv
     "@shopify/cli": "^3.50.0",
     "@shopify/theme": "^3.50.0",
     "prettier": "^2.8.8",
-    "@shopify/prettier-plugin-liquid": "^0.1.0"  
+    "@shopify/prettier-plugin-liquid": "^0.1.0"
   },
   "prettier": {
-    "plugins": ["@shopify/prettier-plugin-liquid"]  
+    "plugins": ["@shopify/prettier-plugin-liquid"]
   }
 }
 

@@ -10,7 +10,7 @@ return {
       wk.add {
 
         { "<leader>c", name = "[C]ode" },
-        { "<leader>d", name = "[D]ocument" },
+        { "<leader>d", name = "[D]ebug" },
         { "<leader>r", name = "[R]ename" },
         { "<leader>s", name = "[S]earch" },
         { "<leader>w", name = "[W]orkspace" },
