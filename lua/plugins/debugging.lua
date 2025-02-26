@@ -39,6 +39,11 @@ return {
         command = "/usr/lib/llvm-14/bin/lldb-vscode", -- Replace with the actual path to your lldb binary
         name = "lldb",
       }
+      local function set_ptrace_scope()
+        local set_ptrace_cmd = "echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope"
+        vim.fn.system(set_ptrace_cmd) -- Run the command to change ptrace_scope
+        print "ptrace_scope set to 0 (for debugging)"
+      end
 
       -- Enhanced helper function to compile the C/C++ file if the binary does not exist or force recompilation
       local function compile_cpp_file()
@@ -102,7 +107,7 @@ return {
           cwd = "${workspaceFolder}",
           stopOnEntry = false, -- Change this to false
           args = {},
-          runInTerminal = false,
+          runInTerminal = true,
           env = function()
             local variables = {}
             for k, v in pairs(vim.fn.environ()) do
@@ -110,51 +115,48 @@ return {
             end
             return variables
           end,
+          -- Before running the debugger, set ptrace_scope
+          preLaunchTask = set_ptrace_scope, -- Run the command to set ptrace_scope
         },
       }
-      -- Use the same configuration for C files
-      dap.configurations.c = dap.configurations.cpp
+      --C files
+      local dap = require "dap"
 
-      -- Update the dap configuration for Rust
-      dap.configurations.rust = {
+      dap.configurations.c = {
         {
-          name = "Launch Rust Program",
+          name = "Launch Program",
           type = "lldb",
           request = "launch",
           program = function()
-            -- For Rust, try to use cargo build first
-            local cargo_toml = vim.fn.findfile("Cargo.toml", vim.fn.getcwd() .. ";")
-            if cargo_toml ~= "" then
-            -- Cargo build logic...
-            else
-              -- Fallback to direct compilation
-              return compile_cpp_file() or vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-            end
+            return compile_cpp_file() or vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
           cwd = "${workspaceFolder}",
-          stopOnEntry = false, -- Change this to false
-          stopAtEntry = true, -- Add this to stop at the main function
+          stopAtEntry = true,
           args = {},
+          runInTerminal = true,
+          env = function()
+            local variables = {}
+            for k, v in pairs(vim.fn.environ()) do
+              table.insert(variables, string.format("%s=%s", k, v))
+            end
+            return variables
+          end,
+          -- Before running the debugger, set ptrace_scope
+          preLaunchTask = set_ptrace_scope, -- Run the command to set ptrace_scope
+
+          --fix common issue "Error on launch: Failed to attach to the target process"
+          -- because The kernel has a security restriction called ptrace_scope, which controls how processes can be debugged
+          --echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+          --make it permanent
+          --echo "kernel.yama.ptrace_scope = 0" | sudo tee -a /etc/sysctl.d/10-ptrace.conf
+          --sudo sysctl --system
+          --cat /proc/sys/kernel/yama/ptrace_scope
+
+          --to undo that
+          --sudo sed -i '/kernel.yama.ptrace_scope = 0/d' /etc/sysctl.d/10-ptrace.conf
+          --sudo sysctl --system
         },
       }
-      -- .NET Debugger (netcoredbg) - Optional if needed
-      local netcoredbg = vim.fn.exepath "netcoredbg"
-      if netcoredbg ~= "" then
-        dap.adapters.coreclr = {
-          type = "executable",
-          command = "netcoredbg",
-          args = { "--interpreter=vscode" },
-        }
-
-        dap.configurations.cs = {
-          {
-            type = "coreclr",
-            name = "launch - netcoredbg",
-            request = "launch",
-          },
-        }
-      end
-
       -- Track debugging state
       local debug_running = false
 
