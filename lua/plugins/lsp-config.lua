@@ -1,5 +1,5 @@
 return {
-  { -- LSP Configuration & Plugins
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -179,6 +179,8 @@ return {
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
       require("mason-lspconfig").setup {
+        ensure_installed = vim.tbl_keys(servers), -- Ensures LSP servers listed in `servers` are installed
+        automatic_installation = true, -- Automatically installs missing servers
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}

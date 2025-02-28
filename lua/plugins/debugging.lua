@@ -1,5 +1,8 @@
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+
 return {
   {
+
     "mfussenegger/nvim-dap",
     dependencies = {
       "mfussenegger/nvim-dap-python", -- Python support
@@ -14,39 +17,44 @@ return {
       local dapui = require "dapui"
       local dap_virtual_text = require "nvim-dap-virtual-text"
 
-      -- Setup dap-ui
       dapui.setup()
+      dap_virtual_text.setup()
 
-      -- Set up dap-python with the python3 executable or path to your python interpreter
-      require("dap-python").setup(vim.fn.exepath "python3") -- This will get the full path of python3 executable
-
-      -- Python debugging configuration
-      dap.configurations.python = {
-        {
-          name = "Launch Python File",
-          type = "python",
-          request = "launch",
-          program = "${file}", -- Launch the currently open Python file
-          pythonPath = function()
-            return vim.fn.exepath "python3" -- Resolve full path to the python3 interpreter
-          end,
-        },
+      require("mason-tool-installer").setup {
+        ensure_installed = { "debugpy", "codelldb" }, -- Ensure debugpy and codelldb are installed by Mason
       }
 
-      -- Add C/C++ Debugger (lldb)
-      dap.adapters.lldb = {
-        type = "executable",
-        command = "/usr/lib/llvm-14/bin/lldb-vscode", -- Replace with the actual path to your lldb binary
-        name = "lldb",
-      }
+      -- To activate external terminal (can be a security issue on the kernel)
       local function set_ptrace_scope()
         local set_ptrace_cmd = "echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope"
         vim.fn.system(set_ptrace_cmd) -- Run the command to change ptrace_scope
         print "ptrace_scope set to 0 (for debugging)"
       end
 
-      -- Enhanced helper function to compile the C/C++ file if the binary does not exist or force recompilation
-      local function compile_cpp_file()
+      -- Python Debugger
+      require("dap-python").setup(vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python")
+      dap.configurations.python = {
+        {
+          name = "Launch Python File",
+          type = "python",
+          request = "launch",
+          program = "${file}", -- Launch the currently open Python file
+          console = "integratedTerminal",
+          pythonPath = function()
+            return vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python"
+          end,
+          preLaunchTask = set_ptrace_scope,
+        },
+      }
+      local codelldb_path = os.getenv "HOME" .. "/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb"
+
+      -- C/C++ Debugger (lldb)
+      dap.adapters.lldb = {
+        type = "executable",
+        command = codelldb_path,
+      }
+      -- Function for C/C++ file if the binary does not exist or force recompilation
+      local function compile_c_language_file()
         -- Get the current file's name (without extension)
         local file_name = vim.fn.expand "%:t:r" -- Removes the extension (e.g., main.cpp -> main)
         local file_dir = vim.fn.expand "%:p:h" -- Get the directory of the current file
@@ -94,69 +102,50 @@ return {
           return nil -- Return nil if compilation failed
         end
       end
-
-      -- Update dap configuration for C++
+      -- dap configuration for C++
       dap.configurations.cpp = {
         {
-          name = "Launch Program",
-          type = "lldb",
+          name = "Launch File",
+          type = "lldb", -- Use "lldb" as the type since codelldb is the executable for lldb
           request = "launch",
           program = function()
-            return compile_cpp_file() or vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            return compile_c_language_file() or vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
           cwd = "${workspaceFolder}",
-          stopOnEntry = false, -- Change this to false
           args = {},
-          runInTerminal = true,
-          env = function()
-            local variables = {}
-            for k, v in pairs(vim.fn.environ()) do
-              table.insert(variables, string.format("%s=%s", k, v))
-            end
-            return variables
-          end,
-          -- Before running the debugger, set ptrace_scope
-          preLaunchTask = set_ptrace_scope, -- Run the command to set ptrace_scope
-        },
-      }
-      --C files
-      local dap = require "dap"
-
-      dap.configurations.c = {
-        {
-          name = "Launch Program",
-          type = "lldb",
-          request = "launch",
-          program = function()
-            return compile_cpp_file() or vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-          end,
-          cwd = "${workspaceFolder}",
           stopAtEntry = true,
-          args = {},
-          runInTerminal = true,
-          env = function()
-            local variables = {}
-            for k, v in pairs(vim.fn.environ()) do
-              table.insert(variables, string.format("%s=%s", k, v))
-            end
-            return variables
-          end,
-          -- Before running the debugger, set ptrace_scope
-          preLaunchTask = set_ptrace_scope, -- Run the command to set ptrace_scope
-
-          --fix common issue "Error on launch: Failed to attach to the target process"
-          -- because The kernel has a security restriction called ptrace_scope, which controls how processes can be debugged
-          --echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-          --make it permanent
-          --echo "kernel.yama.ptrace_scope = 0" | sudo tee -a /etc/sysctl.d/10-ptrace.conf
-          --sudo sysctl --system
-          --cat /proc/sys/kernel/yama/ptrace_scope
-
-          --to undo that
-          --sudo sed -i '/kernel.yama.ptrace_scope = 0/d' /etc/sysctl.d/10-ptrace.conf
-          --sudo sysctl --system
+          preLaunchTask = set_ptrace_scope, -- Optional: Run the command to set ptrace_scope before launching the debugger
         },
       }
+      --  dap.configurations.c = {
+      --    {
+      --      name = "Launch",
+      --      type = "lldb",
+      --      request = "launch",
+      --      program = function()
+      --        return compile_c_language_file() or vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      --      end,
+      --      cwd = "${workspaceFolder}",
+      --      stopOnEntry = false,
+      --      args = {},
+      --      runInTerminal = true,
+
+      --      -- Before running the debugger, set ptrace_scope
+      --      preLaunchTask = set_ptrace_scope, -- Run the command to set ptrace_scope
+
+      --      --fix common issue "Error on launch: Failed to attach to the target process"
+      --      -- because The kernel has a security restriction called ptrace_scope, which controls how processes can be debugged
+      --      --echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+      --      --make it permanent
+      --      --echo "kernel.yama.ptrace_scope = 0" | sudo tee -a /etc/sysctl.d/10-ptrace.conf
+      --      --sudo sysctl --system
+      --      --cat /proc/sys/kernel/yama/ptrace_scope
+
+      --      --to undo that
+      --      --sudo sed -i '/kernel.yama.ptrace_scope = 0/d' /etc/sysctl.d/10-ptrace.conf
+      --      --sudo sysctl --system
+      --    },
+      --  }
       -- Track debugging state
       local debug_running = false
 
