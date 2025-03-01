@@ -41,9 +41,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 --Ensure filetyp detection for .cshtml files
---vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
---  pattern = "*.cshtml",
---  callback = function()
---    vim.bo.filetype = "cshtml"
---  end,
---})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.cshtml",
+  callback = function()
+    vim.bo.filetype = "razor"
+  end,
+})

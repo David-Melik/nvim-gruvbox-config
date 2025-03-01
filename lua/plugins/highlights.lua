@@ -12,6 +12,7 @@ return {
         "diff",
         "html",
         "css",
+        "razor",
         "typescript",
         "javascript",
         "lua",

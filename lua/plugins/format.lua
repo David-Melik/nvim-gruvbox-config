@@ -31,7 +31,6 @@ return {
         -- Conform can also run multiple formatters sequentially
         css = { "prettier" },
         html = { "prettier" },
-        json = { "prettier", "clang-format" },
         markdown = { "markdownlint" },
         python = { "black" },
         --npm install -g prettier @shopify/prettier-plugin-liquid
@@ -39,11 +38,12 @@ return {
         --          {
         --  "plugins": ["@shopify/prettier-plugin-liquid"]
         --}
-        liquid = { "prettier" },
-        javascript = { "prettier", "clang-format" },
+        liquid = { "prettierd" },
+        javascript = { "clang-format" },
         c = { "clang-format" },
+        cpp = { "clang-format" },
         csharp = { "clang-format" },
-        cshtml = { "prettier", "clang-format" },
+        razor = { "prettierd" },
       },
     },
   },

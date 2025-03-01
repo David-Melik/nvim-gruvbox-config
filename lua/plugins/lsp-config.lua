@@ -172,6 +172,7 @@ return {
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
         "prettier", --npm install -g prettier
+        "prettierd",
         -- sudo apt install python3.10-venv
         "black", --Python | pip install isort black
         "clang-format", -- 	C C# C++ JSON Java JavaScript python3 -m pip install clang-format
