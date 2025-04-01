@@ -14,4 +14,26 @@ return {
       },
     },
   },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+
+      vim.g.mkdp_markdown_css = vim.fn.expand "~/.config/joplin-desktop/gruvbox-markdown.css"
+      vim.g.mkdp_theme = "dark"
+    end,
+    ft = { "markdown" },
+    config = function()
+      -- Set keybinding for Markdown Preview Toggle
+      vim.keymap.set(
+        "n",
+        "<Leader>mp",
+        "<cmd>MarkdownPreviewToggle<CR>",
+        { desc = "Toggle Markdown Preview", silent = true }
+      )
+    end,
+  },
 }
