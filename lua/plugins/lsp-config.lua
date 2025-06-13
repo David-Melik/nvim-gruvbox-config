@@ -147,6 +147,7 @@ return {
         pyright = {}, -- Python npm install -g pyright
         --sudo apt install python3.10-venv
         shopify_theme_ls = {}, --Liquid Shopify installation and add the prettier npm to your project
+        rnix = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -169,6 +170,10 @@ return {
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+
+      --=========================
+      --make sure formatter is installed automatically
+      --=========================
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
         "prettier", --npm install -g prettier
@@ -176,6 +181,7 @@ return {
         -- sudo apt install python3.10-venv
         "black", --Python | pip install isort black
         "clang-format", -- 	C C# C++ JSON Java JavaScript python3 -m pip install clang-format
+        "nixfmt",
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 

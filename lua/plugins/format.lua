@@ -44,6 +44,7 @@ return {
         cpp = { "clang-format" },
         csharp = { "clang-format" },
         razor = { "prettierd" },
+        nix = { "nixfmt" },
       },
     },
   },
