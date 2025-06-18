@@ -1,0 +1,181 @@
+/* Gruvbox Theme for Pandoc HTML Output */
+/* Adapted by [Your Name] */
+
+:root {
+  --white: #fbf1c7;
+  --dark-white: #ebdbb2;
+  --light-grey: #928374;
+  --grey: #504945;
+  --dark-grey: #3c3836;
+  --darker-grey: #282828;
+  --black: #1d2021;
+  --red: #fb4934;
+  --red-dark: #cc241d;
+  --green: #b8bb26;
+  --yellow: #fabd2f;
+  --blue: #83a598;
+  --purple: #d3869b;
+  --aqua: #8ec07c;
+  --orange: #fe8019;
+  --font-sans: "Fira Sans", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --primary: var(--yellow);
+  --secondary: var(--yellow-dark);
+  --font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--dark-white);
+  background-color: var(--black);
+  font-size: var(--font-size);
+  line-height: 1.6;
+  max-width: 100vh;
+  margin: 0 auto;
+}
+section {
+  padding: 20px;
+  background-color: var(--black);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  filter: invert(70%) sepia(67%) saturate(4490%) hue-rotate(348deg)
+    brightness(101%) contrast(99%);
+  display: none;
+}
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.6em;
+}
+h3 {
+  font-size: 1.4em;
+}
+h4 {
+  font-size: 1.2em;
+}
+
+p,
+li {
+  color: var(--dark-white);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+blockquote {
+  font-style: italic;
+  border-left: 6px solid var(--light-grey);
+  background-color: var(--darker-grey);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--light-grey);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background-color: var(--dark-grey);
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: var(--aqua);
+}
+
+pre {
+  font-family: var(--font-mono);
+  background: var(--black);
+  padding: 12px;
+  border-radius: 5px;
+  color: var(--white);
+  overflow-x: auto;
+  border: 1px solid var(--grey);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--dark-grey);
+  padding: 3px 5px;
+  border-radius: 4px;
+  color: var(--white) !important;
+  font-size: calc(var(--font-size) - 2px);
+}
+
+hr {
+  border: 1px solid var(--dark-grey);
+}
+
+ul,
+ol {
+  padding-left: 20px;
+}
+
+strong {
+  color: var(--green);
+  font-weight: bold;
+}
+mark {
+  background-color: var(--yellow-dark);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid var(--grey);
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: var(--dark-grey);
+  color: var(--white);
+}
+
+td {
+  background: var(--darker-grey);
+}
+
+pre {
+  background: var(--dark-grey) !important ;
+}
+summary {
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
