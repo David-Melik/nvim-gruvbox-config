@@ -22,12 +22,25 @@ return {
         inverse = true, -- invert background for search, diffs, statuslines and errors
         contrast = "", -- can be "hard", "soft" or empty string
         palette_overrides = {},
-        overrides = {},
+        overrides = {
+          SignColumn = { bg = "#282828" },
+          FoldColumn = { bg = "#282828" },
+        },
         dim_inactive = false,
         transparent_mode = false,
       }
 
       vim.cmd "colorscheme gruvbox"
+
+      -- 🟢 Force all sign/fold columns to match background color
+      local bg = "#282828" -- your Gruvbox Normal background
+
+      -- Remove or match backgrounds for all relevant columns
+      vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { bg = bg, fg = "#fabd2f" })
+      vim.api.nvim_set_hl(0, "DiagnosticSignError", { bg = bg })
+      vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { bg = bg })
+      vim.api.nvim_set_hl(0, "DiagnosticSignHint", { bg = bg })
+
       -- For markdown work with gruvbox
       vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = "#82AAFF", bold = true })
       vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = "#1A2B4A" })

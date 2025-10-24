@@ -175,6 +175,7 @@ return {
       --make sure formatter is installed automatically
       --=========================
       vim.list_extend(ensure_installed, {
+        "jsonls",
         "stylua", -- Used to format Lua code
         "prettier", --npm install -g prettier
         "prettierd",
@@ -182,6 +183,8 @@ return {
         "black", --Python | pip install isort black
         "clang-format", -- 	C C# C++ JSON Java JavaScript python3 -m pip install clang-format
         "nixfmt",
+        "markdownlint",
+        "pretty-php",
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 

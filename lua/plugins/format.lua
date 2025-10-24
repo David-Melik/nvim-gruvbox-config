@@ -14,6 +14,7 @@ return {
         desc = "[F]ormat buffer",
       },
     },
+
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -38,8 +39,9 @@ return {
         --          {
         --  "plugins": ["@shopify/prettier-plugin-liquid"]
         --}
+        php = { "pretty-php" },
         liquid = { "prettierd" },
-        javascript = { "clang-format" },
+        javascript = { "prettierd" },
         c = { "clang-format" },
         cpp = { "clang-format" },
         csharp = { "clang-format" },
