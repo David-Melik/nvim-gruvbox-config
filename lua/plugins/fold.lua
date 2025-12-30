@@ -23,6 +23,10 @@ return {
     -- UFO setup
     require("ufo").setup {
       provider_selector = function(bufnr, filetype, buftype)
+        local disabled_filetypes = { "neo-tree", "NvimTree", "TelescopePrompt" }
+        if vim.tbl_contains(disabled_filetypes, filetype) then
+          return nil -- return nil instead of {} to avoid error
+        end
         return { "treesitter", "indent" }
       end,
     }
