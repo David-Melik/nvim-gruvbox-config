@@ -65,6 +65,7 @@ return {
         "󱞁  Joplin",
         ":cd $HOME/.config/joplin-desktop <CR> ::Neotree filesystem reveal left<CR>"
       ),
+      dashboard.button("n", "󱄅  Nix", ":cd $HOME/home-manager/ <CR> ::Neotree filesystem reveal left<CR>"),
       dashboard.button("m", "󱌣   Mason", ":Mason<CR>"),
       dashboard.button("l", "󰒲   Lazy", ":Lazy<CR>"),
       dashboard.button("u", "󰚰  Update plugins", "<cmd>lua require('lazy').sync()<CR>"),
