@@ -87,3 +87,17 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "VimResized" }, {
 		vim.opt.numberwidth = width
 	end,
 })
+
+-- Toogle diagnostic warning and error display
+vim.g["diagnostics_active"] = true
+function Toggle_diagnostics()
+	if vim.g.diagnostics_active then
+		vim.g.diagnostics_active = false
+		vim.diagnostic.enable(false)
+	else
+		vim.g.diagnostics_active = true
+		vim.diagnostic.enable(true)
+	end
+end
+
+vim.keymap.set("n", "<C-n>", Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
