@@ -39,7 +39,7 @@ return {
 				--  "plugins": ["@shopify/prettier-plugin-liquid"]
 				--}
 				liquid = { "prettierd" },
-				javascript = { "clang-format" },
+				javascript = { "prettier" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				csharp = { "clang-format" },
