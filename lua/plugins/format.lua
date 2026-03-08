@@ -38,6 +38,7 @@ return {
 				--          {
 				--  "plugins": ["@shopify/prettier-plugin-liquid"]
 				--}
+				php = { "easy-coding-standard" },
 				liquid = { "prettierd" },
 				javascript = { "prettier" },
 				c = { "clang-format" },
