@@ -66,6 +66,7 @@ return {
 		vim.o.foldlevel = 99 -- Start with all folds open
 		vim.o.foldlevelstart = 99 -- Start with all folds open
 		vim.o.foldenable = true -- Enable folding
+		vim.o.foldmethod = "manual" -- Enable manual folding
 
 		-- Enhanced keymaps for folding
 		vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })

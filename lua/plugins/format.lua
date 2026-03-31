@@ -42,6 +42,7 @@ return {
 				liquid = { "prettierd" },
 				javascript = { "prettier" },
 				c = { "clang-format" },
+				cs = { "clang-format" },
 				cpp = { "clang-format" },
 				csharp = { "clang-format" },
 				razor = { "prettierd" },

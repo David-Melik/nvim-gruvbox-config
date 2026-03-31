@@ -138,32 +138,36 @@ return {
 				jsonls = {}, -- JSON  npm install -g vscode-json-languageserver
 				cssls = {}, --css npm install -g vscode-langservers-extracted
 				html = {}, --npm i:help lspconfig-allnstall -g vscode-langservers-extracted
-				--omnisharp = { --C#
-				--  capabilities = capabilities,
-				--  cmd = { "dotnet", vim.fn.stdpath "data" .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" },
-				--  enable_import_completion = true,
-				--  organize_imports_on_format = true,
-				--  enable_roslyn_analyzers = true,
-				--  root_dir = function()
-				--    return vim.loop.cwd() -- current working directory
-				--  end,
-				--},
+				omnisharp = { --C#
+					capabilities = capabilities,
+					--cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" },
+					cmd = { "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+					enable_import_completion = true,
+					organize_imports_on_format = true,
+					enable_roslyn_analyzers = true,
+					root_dir = function()
+						return vim.loop.cwd() -- current working directory
+					end,
+				},
+				phpactor = {},
 				--sudo apt install dotnet-sdk-8.0
 				pyright = {}, -- Python npm install -g pyright
 				--sudo apt install python3.10-venv
 				shopify_theme_ls = {}, --Liquid Shopify installation and add the prettier npm to your project
 				rnix = {},
-				lua_ls = {
-					settings = {
-						Lua = {
-							completion = {
-								callSnippet = "Replace",
-							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
-						},
-					},
-				},
+				-- lua_ls = {
+				-- 	settings = {
+				-- 		Lua = {
+				-- 			completion = {
+				-- 				callSnippet = "Replace",
+				-- 			},
+				-- 			-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+				-- 			-- diagnostics = { disable = { 'missing-fields' } },
+				-- 		},
+				-- 	},
+				-- },
+				stylua = {},
+				bashls = {},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -187,7 +191,10 @@ return {
 				"easy-coding-standard",
 				"black", --Python | pip install isort black
 				"clang-format", -- 	C C# C++ JSON Java JavaScript python3 -m pip install clang-format
+				--"omnisharp",
 				"nixfmt",
+				-- for bash
+				"beautysh",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
