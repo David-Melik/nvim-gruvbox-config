@@ -51,14 +51,14 @@ vim.opt.showmode = true
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
---vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 -- Keep yanks synced to system clipboard
-vim.api.nvim_set_keymap("n", "y", '"+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "y", '"+y', { noremap = true, silent = true })
-
--- Make deletes go to blackhole register (internal only)
-vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "d", '"_d', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap("n", "y", '"+y', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap("v", "y", '"+y', { noremap = true, silent = true })
+--
+---- Make deletes go to blackhole register (internal only)
+--vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap("n", "d", '"_d', { noremap = true, silent = true })
 
 -- Enable break indent
 vim.opt.breakindent = true
