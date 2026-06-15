@@ -78,7 +78,7 @@ return {
 		end, { desc = "Peek fold" })
 
 		-- Extra convenience keymaps
-		vim.keymap.set("n", "<leader>zf", function()
+		vim.keymap.set("n", "zf", function()
 			local winid = require("ufo").peekFoldedLinesUnderCursor()
 			if not winid then
 				-- If ufo peek doesn't work, try LSP hover as fallback
