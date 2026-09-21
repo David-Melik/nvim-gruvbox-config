@@ -39,7 +39,36 @@ vim.opt.showmode = true
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = "unnamedplus"
+--vim.opt.clipboard = "unnamedplus"
+
+vim.opt.clipboard = ""
+
+-- Yank → system clipboard
+vim.keymap.set({ "n", "v" }, "y", '"+y', { noremap = true })
+
+-- Delete/change → black hole
+vim.keymap.set("n", "dd", '"_dd', { noremap = true })
+vim.keymap.set("n", "D", '"_D', { noremap = true })
+vim.keymap.set("n", "x", '"_x', { noremap = true })
+vim.keymap.set("n", "X", '"_X', { noremap = true })
+
+vim.keymap.set("n", "c", '"_c', { noremap = true })
+vim.keymap.set("n", "C", '"_C', { noremap = true })
+
+vim.keymap.set("v", "d", '"_d', { noremap = true })
+vim.keymap.set("v", "c", '"_c', { noremap = true })
+
+--vim.g.clipboard = {
+--	name = "OSC 52",
+--	copy = {
+--		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+--		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+--	},
+--	paste = {
+--		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+--		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+--	},
+--}
 -- Keep yanks synced to system clipboard
 --vim.api.nvim_set_keymap("n", "y", '"+y', { noremap = true, silent = true })
 --vim.api.nvim_set_keymap("v", "y", '"+y', { noremap = true, silent = true })
